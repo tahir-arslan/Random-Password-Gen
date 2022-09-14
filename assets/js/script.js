@@ -26,18 +26,10 @@ function generatePassword() {
 
   // combine selected types into array
   var selectedCharacterTypes = [];
-  if (useLowerLetters) { 
-    selectedCharacterTypes = selectedCharacterTypes.concat(lowerLetters);
-  }
-  if (useUpperLetters) {
-    selectedCharacterTypes = selectedCharacterTypes.concat(upperLetters);
-  }
-  if (useNumbers) {
-    selectedCharacterTypes = selectedCharacterTypes.concat(numbers);
-  }
-  if (useSymbols) { 
-    selectedCharacterTypes = selectedCharacterTypes.concat(symbols);
-  }
+  if (useLowerLetters) selectedCharacterTypes = selectedCharacterTypes.concat(lowerLetters);
+  if (useUpperLetters) selectedCharacterTypes = selectedCharacterTypes.concat(upperLetters);
+  if (useNumbers) selectedCharacterTypes = selectedCharacterTypes.concat(numbers);
+  if (useSymbols) selectedCharacterTypes = selectedCharacterTypes.concat(symbols);
 
   // password generator given custom array
   var randomSelection = [];
@@ -47,13 +39,23 @@ function generatePassword() {
   return randomSelection.join('');
 }
 
+// copy function
+function copyPassword () {
+  var copyText = document.getElementById("#password");
+  copyText.select();
+  copyText.setSelectionRange(0,999);
+  document.execCommand("copy");
+}
+
 var passwordText = document.querySelector("#password");
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
+var copyBtn = document.querySelector("#copyPass");
 function writePassword() {
   var password = generatePassword();
   passwordText.value = password;
 }
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+copyBtn.addEventListener("click", copyPassword);
